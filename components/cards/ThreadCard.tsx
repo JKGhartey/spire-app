@@ -41,9 +41,8 @@ function ThreadCard({
 }: Props) {
   return (
     <article
-      className={`flex w-full flex-col rounded-xl ${
-        isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
-      }`}
+      className={`flex w-full flex-col rounded-xl relative ${isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
+        }`}
     >
       <div className='flex items-start justify-between'>
         <div className='flex w-full flex-1 flex-row gap-4'>
@@ -57,7 +56,10 @@ function ThreadCard({
               />
             </Link>
 
-            <div className='thread-card_bar' />
+            {comments.length > 0 && (
+              <div className='thread-card_bar' />
+
+            )}
           </div>
 
           <div className='flex w-full flex-col'>
@@ -123,6 +125,12 @@ function ThreadCard({
         />
       </div>
 
+      <div className="absolute right-10 bottom-8">
+        <p className='text-subtle-medium text-gray-1'>
+          {formatDateString(createdAt)}
+        </p>
+      </div>
+
       {!isComment && comments.length > 0 && (
         <div className='ml-1 mt-3 flex items-center gap-2'>
           {comments.slice(0, 2).map((comment, index) => (
@@ -150,10 +158,8 @@ function ThreadCard({
           className='mt-5 flex items-center'
         >
           <p className='text-subtle-medium text-gray-1'>
-            {formatDateString(createdAt)}
-            {community && ` - ${community.name} Community`}
+            {community && ` ${community.name} Community`}
           </p>
-
           <Image
             src={community.image}
             alt={community.name}

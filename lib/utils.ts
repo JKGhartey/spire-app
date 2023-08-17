@@ -14,21 +14,45 @@ export function isBase64Image(imageData: string) {
 
 // created by chatgpt
 export function formatDateString(dateString: string) {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-
   const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString(undefined, options);
+  const currentDate = new Date();
 
-  const time = date.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit",
-  });
+  const timeDifferenceInMilliseconds = currentDate.getTime() - date.getTime();
+  const millisecondsInMinute = 60 * 1000;
+  const millisecondsInHour = 60 * millisecondsInMinute;
+  const millisecondsInDay = 24 * millisecondsInHour;
+  const millisecondsInFiveDays = 5 * millisecondsInDay;
 
-  return `${time} - ${formattedDate}`;
+  if (timeDifferenceInMilliseconds < millisecondsInFiveDays) {
+    if (timeDifferenceInMilliseconds < millisecondsInMinute) {
+      const secondsAgo = Math.floor(timeDifferenceInMilliseconds / 1000);
+      return `${secondsAgo} seconds ago`;
+    } else if (timeDifferenceInMilliseconds < millisecondsInHour) {
+      const minutesAgo = Math.floor(
+        timeDifferenceInMilliseconds / millisecondsInMinute
+      );
+      return `${minutesAgo} minutes ago`;
+    } else if (timeDifferenceInMilliseconds < millisecondsInDay) {
+      const hoursAgo = Math.floor(
+        timeDifferenceInMilliseconds / millisecondsInHour
+      );
+      return `${hoursAgo} hours ago`;
+    } else {
+      const daysAgo = Math.floor(
+        timeDifferenceInMilliseconds / millisecondsInDay
+      );
+      return `${daysAgo} days ago`;
+    }
+  } else {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+
+    const formattedDate = date.toLocaleDateString(undefined, options);
+    return formattedDate;
+  }
 }
 
 // created by chatgpt

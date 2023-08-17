@@ -6,8 +6,8 @@ import { currentUser } from "@clerk/nextjs";
 // import { fetchUsers } from "@/lib/actions/user.actions";
 
 async function RightSidebar() {
-  const user = await currentUser();
-  if (!user) return null;
+  // const user = await currentUser();
+  // if (!user) return null;
 
   // const similarMinds = await fetchUsers({
   //   userId: user.id,

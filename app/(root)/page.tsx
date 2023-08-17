@@ -6,6 +6,8 @@ import Pagination from "@/components/shared/Pagination";
 
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
+import Link from "next/link";
+import Image from "next/image";
 
 async function Home({
   searchParams,
@@ -48,6 +50,19 @@ async function Home({
           </>
         )}
       </section>
+
+      <Link href="/create-thread">
+        <div className="max-lg:hidden">
+          <Image
+            src="/assets/pen.svg"
+            className="bg-primary-500 createthreadbtn"
+            alt="Create Thread"
+            height={60}
+            width={60}
+            priority
+          />
+        </div>
+      </Link>
 
       <Pagination
         path='/'

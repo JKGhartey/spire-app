@@ -5,6 +5,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { deleteThread } from "@/lib/actions/thread.actions";
 
+import { useToast } from "@/components/ui/use-toast"
+
 interface Props {
   threadId: string;
   currentUserId: string;
@@ -23,19 +25,28 @@ function DeleteThread({
   const pathname = usePathname();
   const router = useRouter();
 
+  const { toast } = useToast()
+
   if (currentUserId !== authorId || pathname === "/") return null;
 
   return (
     <Image
       src='/assets/delete.svg'
-      alt='delte'
+      alt='delete'
       width={18}
       height={18}
       className='cursor-pointer object-contain'
       onClick={async () => {
         await deleteThread(JSON.parse(threadId), pathname);
         if (!parentId || !isComment) {
-          router.push("/");
+
+          toast({
+            variant: "destructive",
+            title: "Successfully deleted Thread",
+            description: "Thread removed!",
+          })
+
+          // router.push("/");
         }
       }}
     />

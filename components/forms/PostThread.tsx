@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 
 import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
@@ -27,6 +28,8 @@ interface Props {
 function PostThread({ userId }: Props) {
   const router = useRouter();
   const pathname = usePathname();
+
+  const {toast} = useToast()
 
   const { organization } = useOrganization();
 
@@ -45,6 +48,11 @@ function PostThread({ userId }: Props) {
       communityId: organization ? organization.id : null,
       path: pathname,
     });
+
+    toast({
+      title: "Post Created",
+      description: "Created your Post",
+    })
 
     router.push("/");
   };

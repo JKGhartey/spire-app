@@ -71,4 +71,4 @@ Contact
 
 For more information or support, please contact <gharteyjerome@gmail.com>.
 
-Visit the Spire App on Vercel: [Spire App](<https://chat.openai.com/vercel_link](https://threads-app-weld.vercel.app/>)
+Visit the Spire App on Vercel: [Spire App](<https://threads-app-weld.vercel.app/>)
